@@ -1,0 +1,178 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" type="text/css" href="login.css">
+    <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.14.0/css/all.min.css">
+</head>
+<body>
+    <div class="logo">
+        <img src="./logo2.png" alt="" width="150">
+    </div>
+    <div class="container" id="main">     
+        <div class="sign-up" >
+            <form id="signupform">
+                <h1>Create Account</h1>
+                <div class="social-container">
+                    <a href="" class="social">
+                        <i class="fab fa-facebook-f"></i>
+                    </a>
+                    <a href="" class="social">
+                        <i class="fab fa-google-plus-g"></i>
+                    </a>
+                    <a href="" class="social">
+                        <i class="fab fa-linkedin-in"></i>
+                    </a>
+                </div>
+                <p>or use your email for registration</p>
+                <input type="text" id="fullname" name="fullname" placeholder="Full Name" required="">
+                <input type="email" id="email" name="emailid" placeholder="Email-Id" required="">
+                <input type="password" id="password" name="passwords" placeholder="password" required="">
+                <button type="submit" id="signup">Sign Up</button>
+            </form>
+        </div>
+        <div class="sign-in">
+            <form id="signinform">
+                <h1>Sign In</h1>
+                <div class="social-container">
+                    <a href="" class="social">
+                        <i class="fab fa-facebook-f"></i>
+                    </a>
+                    <a href="" class="social">
+                        <i class="fab fa-google-plus-g"></i>
+                    </a>
+                    <a href="" class="social">
+                        <i class="fab fa-linkedin-in"></i>
+                    </a>
+                </div>
+                <p>or use your account</p>
+                <input type="email" id="loginEmail" name="emailid" placeholder="Email-Id" required="">
+                <input type="password" id="loginPassword" name="passwords" placeholder="password" required="">
+                <a onclick="handleClick()" id="forgetPassword">Forget your Password</a>
+                <button type="submit" id="signin">Sign in</button>
+            </form>
+        </div>
+        <div class="overlay-container">
+            <div class="overlay">
+                <div class="overlay-left">
+                  <h1>Hello,</h1>
+                  <p>Enter your personal details and start journey with us</p>
+                  <button id="signIn">Sign In</button>
+                </div>
+                <div class="overlay-right">
+                  <h1>Welcome Back!</h1>
+                  <p>To keep connected with us please login with your personal info</p>
+                    <button id="signUp">Sign Up</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- asad js -->
+    <script type="text/javascript">
+        const signUpButton = document.getElementById('signUp');
+        const signInButton = document.getElementById('signIn');
+        const main = document.getElementById('main');
+
+        signUpButton.addEventListener('click', () =>{
+            
+            main.classList.add('right-panel-active');
+            console.log("click1");
+        });
+        signInButton.addEventListener('click', () =>{
+            console.log("click");
+            main.classList.remove('right-panel-active');
+        });
+    </script>
+<!-- babloo js -->
+    <script>
+        function handleClick(){
+            window.location.href = "forgetPassword.html";
+        }
+        document.getElementById('signupform')?.addEventListener('submit', async function(event) {
+            event.preventDefault(); // Prevent the default form submission
+console.log(event);
+            // Get the values from the form inputs
+            const fullname = document.getElementById("fullname").value
+            const email = document.getElementById('email').value;
+            const password = document.getElementById('password').value;
+            let token = "";
+            try {
+                // Send a POST request to the server
+                const response = await fetch('http://localhost:4000/signup', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                    },
+                    body: JSON.stringify({fullname:fullname, email: email, password: password }) // Include password in request body
+                });
+
+                // Handle the response
+                const result = await response.json();
+                console.log(result);
+                if(response.ok){
+                    console.log(result.message);
+                    if(result.token != undefined){
+                      console.log(result.token.length)
+                    token = result.token;
+                    localStorage.setItem('token',result.token);
+                    }
+                   
+                }else{
+                    alert('Login failed: ' + result.message);
+                }
+              } catch (error) {
+                console.error("Error during signup:", error);
+                alert("Login failed. Please try again.");
+              }
+              
+             if(token){
+               window.location.href = "teachers.html";
+             }else{
+              alert("something went wrong on server side");
+             }
+        });
+
+
+        document.getElementById('signinform')?.addEventListener('submit', async function(event) {
+            event.preventDefault(); // Prevent the default form submission
+            // Get the values from the form inputs
+            const email = document.getElementById('loginEmail').value;
+            const password = document.getElementById('loginPassword').value;
+            console.log(email,password);
+            try {
+                // Send a POST request to the server
+                const response = await fetch('http://localhost:4000/login', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                    },
+                    body: JSON.stringify({email: email, password: password }) // Include password in request body
+                });
+
+                // Handle the response
+                const result = await response.json();
+                console.log(result);
+                if(response.ok){
+                    console.log(result.message);
+                    if(result.token !== undefined){
+                    localStorage.setItem('token',result.token);
+                    }
+                   
+                }else{
+                    alert('Login failed: ' + result.message);
+                }
+              } catch (error) {
+                console.error("Error during signup:", error);
+                alert("Login failed. Please try again.");
+              }
+              if(localStorage.getItem("token")){window.location.href="teachers.html"}
+        });
+
+        
+    </script>
+
+</body>
+</html>

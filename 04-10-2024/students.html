@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Students Section</title>
+    <link rel="stylesheet" href="students.css" />
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script src="./students.js" defer=""></script>
+    <!-- <style>
+      @import url('https://fonts.googleapis.com/css2?family=3:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&display=swap');
+    </style> -->
+  </head>
+  <body>
+    <div class="wrapper">
+      <div class="logo">
+        <img src="./logo2.png" alt="" width="200px">
+      </div>
+      <div class="container">
+        
+        <div class="title">
+          <h1 class="heading">Welcome to Student Section</h1>
+        </div>
+    
+        <!-- Metrics Container -->
+        <div class="main-container">
+          <div class="bp-meter">
+            <div class="canvas">
+              <canvas id="bp_chart"></canvas>
+            </div>
+    
+            <div class="graph-value">
+              <p class="text">Bp</p>
+              <p class="real-time-value" id="bpvalue" >00</p>
+            </div>
+          </div>
+
+          <!-- SPO2 METRIC -->
+          <div class="spo2-meter">
+            <div class="canvas">
+              <canvas id="spo2Graph"></canvas>
+            </div>
+            <div class="graph-value">
+              <p class="text">SpO2:</p>
+              <p class="real-time-value" id="spo2Value">00</p>
+            </div>
+          </div>
+    
+          <!-- PULSE RATE MATERIC -->
+          <div class="pulse-meter">
+            <div class="canvas">
+              <canvas id="pulseGraph"></canvas>
+            </div>
+            <div class="graph-value">
+              <p class="text">Pulse Rate:</p>
+              <p id="pulseValue" class="real-time-value">00</p>
+            </div>
+          </div>
+
+          <div class="ecg-meter">
+            <div class="canvas">
+              <canvas id="ecgGraph"></canvas>
+            </div>
+            <div class="graph-value">
+              <p class="text">Ecg</p>
+              <p id="ecgValue" class="real-time-value">00</p>
+            </div>
+          </div>
+    
+          <!-- CVP METHRIC -->
+          <div class="cvp-meter">
+            <div class="canvas">
+              <canvas id="cvpGraph"></canvas>
+            </div>
+            <div class="graph-value">
+              <p class="text">CVP:</p>
+              <p id="cvpValue" class="real-time-value">00</p>
+            </div>
+          </div>
+    
+          <!-- PAP METRIC -->
+          <div class="pap-meter">
+            <div class="canvas">
+              <canvas id="papGraph"></canvas>
+            </div>
+            <div class="graph-value">
+              <p class="text">PAP:</p>
+              <p id="papValue" class="real-time-value">00</p>
+            </div>
+          </div>
+    
+          <!-- ETCO2 METRIC -->
+          <div class="etco2-meter">
+            <div class="canvas">
+              <canvas id="etco2Graph"></canvas>
+            </div>
+            <div class="graph-value">
+              <p class="text">ETCO2:</p>
+              <p id="etco2Value" class="real-time-value">00</p>
+            </div>
+          </div>
+    
+          <!-- RR METRIC -->
+          <div class="rr-meter">
+            <div class="canvas">
+              <canvas id="rrGraph"></canvas>
+            </div>
+            <div class="graph-value">
+              <p class="text">RR</p>
+              <p id="rrValue" class="real-time-value">00</p>
+            </div>
+          </div>
+
+        </div>
+
+      </div> 
+
+    </div>
+  </body>
+</html>

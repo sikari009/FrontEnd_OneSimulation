@@ -1,0 +1,236 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Teacher-Section</title>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script src="./create.js" defer=""></script>
+    <link rel="stylesheet" href="teachers1.css">
+  <!-- <link rel="stylesheet" href="teachers.css"> -->
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&display=swap');
+  </style>
+
+</head>
+<body>
+  
+  <div class="wrapper">
+    <div class="logo">
+      <img src="./logo2.png" alt="" width="200px">
+    </div>
+    <div class="title">
+      <h1 class="heading">Welcome to Teacher Section</h1>
+    </div>
+    <div class="main-container">
+    
+      <div class="container">
+        <aside class="aside">
+          <div class="btn">
+            <button id="start-monitoring" class="section-start">
+              Monitoring
+            </button>
+            <button id="back" class="section-back">Back</button>
+          </div>
+          <!-- drop down  -->
+          <div class="drop-down">
+            <div class="health-scenario">
+              <div class="left">
+                <p class="health-text">Health Condition</p>
+              </div>
+              <div class="right">
+                <select id="healthCondition" class="scenario-dropdown box">
+                  <option value="normal">Normal</option>
+                  <option value="etc">ETC</option>
+                  <option value="pediatrics">Pediatrics</option>
+                  <option value="phtls">PHTLS</option>
+                  <option value="etco2">ETCO2</option>
+                  <option value="atls">ATLS</option>
+                </select>
+              </div>
+            </div>
+  
+            <!-- Dropdown for Specific Diseases or Conditions -->
+            <div class="drop-down">
+              <div class="disease-scenario health-scenario">
+                <div class="left">
+                  <p class="health-text">Disease or Condition</p>
+                </div>
+                <div class="right right-2nd">
+                  <select id="diseaseCondition" class="scenario-dropdown box">
+                    <option value="normal">Normal</option>
+                    <option value="hypertension">Hypertension</option>
+                    <option value="diabetes">Diabetes</option>
+                    <option value="asthma">Asthma</option>
+                    <option value="cardiac_arrest">Cardiac Arrest</option>
+                    <option value="pneumonia">Pneumonia</option>
+                    <option value="neuraxial">Neuraxial</option>
+                    <option value="laryngospasm">Laryngospasm</option>
+                    <option value="ga">GA</option>
+                    <option value="high_neuraxial">High Neuraxial</option>
+                    <option value="ga_induction">GA Induction</option>
+                    <option value="emergence">Emergence</option>
+                    <option value="hypotension">Hypotension in C-section</option>
+                    <option value="neonatal_resuscitation">
+                      Neonatal Resuscitation
+                    </option>
+                    <option value="intraoperative_hypoxia">
+                      Intraoperative Hypoxia
+                    </option>
+                    <option value="maternal_cardiac_arrest">
+                      Maternal Cardiac Arrest
+                    </option>
+                    <option value="tachycardia">Tachycardia</option>
+                    <option value="bradycardia">Bradycardia</option>
+                    <option value="irregular">Irregular</option>
+                  </select>
+                </div>
+              </div>
+            </div>
+          </div>
+        </aside>
+      </div>
+  
+  
+      <div class="graphs">
+        <div class="bp-meter">
+            <div class="canvas-div">
+              <canvas id="bp_chart" class="canvas"></canvas>
+            </div>
+            <div class="graph-value">
+              <div class="runing-value">
+                <p class="text">Bp </p>
+                <p class="real-time-value" id="bpvalue">0</p>
+              </div>
+              <div class="input-tag">
+                <input type="text" class="input-value" id="bpHighinputvalue" onchange="printbpHighInputValue(event)" />
+                <input type="text" class="input-value" id="bpLowinputvalue" onchange="printbpLowInputValue(event)" />
+                <!-- <input type=text" id="myInput" onchange="handleInputChange(event)"> -->
+              </div>
+            </div>
+        </div>
+  
+        <div class="spo2-meter">
+          <div class="canvas-div"><canvas id="spo2_chart" class="canvas"></canvas></div>
+            
+            <div class="graph-value">
+              <div class="runing-value">
+                <p class="text">Spo2 </p>
+                <p class="real-time-value" id="spo2value">0</p>
+              </div>
+              
+              <div class="input-tag">
+                <input type="text" class="input-value" id="spo2Highinputvalue" onchange="printspo2HighInputValue(event)">
+                <input type="text" class="input-value" id="spo2Lowinputvalue" onchange="printspo2LowInputValue(event)">
+              </div>
+            </div>
+          </div>
+  
+          <div class="pulse-meter">
+            <div class="canvas-div">
+              <canvas id="pulse_chart" class="canvas"></canvas>
+            </div>
+            
+            <div class="graph-value">
+              <div class="runing-value">
+                <p class="text">Pulse </p>
+                <p class="real-time-value" id="pulsevalue">0</p>
+              </div>
+              <div class="input-tag">
+                <input type="text" class="input-value" id="pulseHighinputvalue" onchange="printpulseHighInputValue(event)">
+                <input type="text" class="input-value" id="pulseLowinputvalue" onchange="printpulseLowInputValue(event)">
+              </div>
+            </div>
+          </div>
+          <div class="ecg-meter">
+            <div class="canvas-div">
+              <canvas id="ecg_chart" class="canvas"></canvas>
+            </div>
+            
+            <div class="graph-value">
+              <div class="runing-value">
+                <p class="text">ECG </p>
+                <p class="real-time-value" id="ecgvalue">0</p>
+              </div>
+              <div class="input-tag">
+                <input type="text" class="input-value" id="ecgHighinputvalue" onchange="printecgHighInputValue(event)">
+                <input type="text" class="input-value" id="ecgLowinputvalue" onchange="printecgLowInputValue(event)">
+              </div>
+            </div>
+          </div>
+  
+          <div class="cvp-meter">
+            <div class="canvas-div">
+              <canvas id="cvp_chart" class="canvas"></canvas>
+            </div>
+            
+            <div class="graph-value">
+              <div class="runing-value">
+                <p class="text">CVP </p>
+                <p class="real-time-value" id="cvpvalue">0</p>
+              </div>
+              <div class="input-tag">
+                <input type="text" class="input-value" id="cvpHighinputvalue" onchange="printcvpHighInputValue(event)">
+                <input type="text" class="input-value" id="cvpLowinputvalue" onchange="printcvpLowInputValue(event)">
+              </div>
+            </div>
+          </div>
+  
+          <div class="pap-meter">
+            <div class="canvas-div">
+              <canvas id="pap_chart" class="canvas"></canvas>
+            </div>
+            <div class="graph-value">
+              <div class="runing-value">
+                <p class="text">PAP</p>
+                <p class="real-time-value" id="papvalue">0</p>
+              </div>
+              
+              <div class="input-tag">
+                <input type="text" class="input-value" id="papHighinputvalue" onchange="printpapHighInputValue(event)">
+                <input type="text" class="input-value" id="papLowinputvalue" onchange="printpapLowInputValue(event)">
+              </div>
+            </div>
+          </div>
+  
+          <div class="etco2-meter">
+            <div class="canvas-div">
+              <canvas id="etco2_chart" class="canvas"></canvas>
+            </div>
+              <div class="graph-value">
+                <div class="runing-value">
+                  <p class="text">ETCO2</p>
+                  <p class="real-time-value" id="etco2value">0</p>
+                </div>
+                <div class="input-tag">
+                  <input type="text" class="input-value" id="etco2Highinputvalue" onchange="printetco2HighInputValue(event)">
+                  <input type="text" class="input-value" id="etco2lowinputvalue" onchange="printetco2LowInputValue(event)">
+                </div>
+              </div>
+          </div>
+  
+          <div class="rr-meter">
+            <div class="canvas-div">
+              <canvas id="rr_chart" class="canvas"></canvas>
+            </div>
+            <div class="graph-value">
+              <div class="runing-value">
+                <p class="text">RR</p>
+                <p class="real-time-value" id="rrvalue">0</p>
+              </div> 
+              <div class="input-tag">
+                <input type="text" class="input-value" id="rrHighinputvalue" onchange="printrrInputHighValue(event)">
+                <input type="text" class="input-value" id="rrLowinputvalue" onchange="printrrInputLowValue(event)">
+              </div>
+            </div>
+          </div>
+
+      </div>
+    </div>
+  </div>
+  
+  
+
+</body>
+
+</html>
